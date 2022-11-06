@@ -1,0 +1,132 @@
+/*================================ 
+    #RESPONSIVE CSS 
+====================================*/
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    /* Portfolio */
+    .utf-portfolio-area-item .utf-portfolio-items .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items.col-2 .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items.col-3 .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items.col-4 .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items .pf-item.width {
+        width: 50%;
+    }
+    .portfolio-details-area .right-info {
+        margin-top: 30px;
+        padding-left: 15px;
+    }
+}
+
+
+/* Mobile Layout: 320px. */
+
+@media only screen and (max-width: 767px) {
+    /* Heading */
+    h1 {
+        font-size: 36px;
+    }
+    h2 {
+        font-size: 26px;
+    }
+    h3 {
+        font-size: 20px;
+    }
+    h4 {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+    h5 {
+        font-size: 16px;
+        line-height: 1.4;
+    }
+    h6 {
+        font-size: 14px;
+        line-height: 1.4;
+    }
+    .bg-fixed {
+        background-attachment: fixed;
+        background-position: center right;
+        background-size: cover;
+    }
+    .utf-box-cell .content h3 {
+        font-size: 18px;
+    }
+    .default-padding {
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+    .padding-xl {
+        padding-bottom: 50px;
+        padding-top: 50px;
+    }
+    .default-padding.bottom-less {
+        padding-bottom: 20px;
+        padding-top: 50px;
+    }
+    .default-padding-bottom {
+        padding-bottom: 50px;
+    }
+    .default-padding-top {
+        padding-top: 50px;
+    }
+    .default-padding.bottom-30 {
+        padding-bottom: 0;
+        padding-top: 50px;
+    }
+    .default-padding.bottom-20 {
+        padding-bottom: 20px;
+        padding-top: 50px;
+    }
+    /* Portfolio */
+    .utf-portfolio-area-item.default-padding {
+        padding-bottom: 35px;
+    }
+    .utf-portfolio-area-item .utf-portfolio-items .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items.col-2 .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items.col-3 .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items.col-4 .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items .pf-item.width {
+        width: 100%;
+    }
+    .mix-item-menu {
+        text-align: center;
+    }
+    .mix-item-menu.text-left button,
+    .mix-item-menu button {
+        margin-bottom: 10px;
+    }
+    .mix-item-menu.active-border button.active::after {
+        left: 50%;
+        margin-left: -15px;
+    }
+    .mix-item-menu.category-count button.active::after {
+        display: none;
+    }
+    .mix-item-menu.category-count button {
+        padding: 6px 20px;
+        margin-bottom: 12px
+    }
+    .portfolio-details-area .right-info {
+        margin-top: 30px;
+        padding-left: 15px;
+    }
+    .related-projects .owl-dots {
+        margin-bottom: -15px;
+    }
+    .mix-item-menu.dots button::after {
+        display: none;
+    }
+    .mix-item-menu.dots button {
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (min-width: 580px) and (max-width: 767px) {
+    .utf-portfolio-area-item .utf-portfolio-items .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items.col-2 .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items.col-3 .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items.col-4 .pf-item,
+    .utf-portfolio-area-item .utf-portfolio-items .pf-item.width {
+        width: 50%;
+    }
+}
