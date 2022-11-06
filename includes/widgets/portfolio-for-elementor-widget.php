@@ -148,6 +148,29 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 				]
 			]
 		);
+		$this->add_control(
+			'number_of_column_show',
+			[
+				'label'   => esc_html__( 'Number of Column', 'portfolio-for-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => '3',
+				'options' => [
+					'2' => esc_html__( '2 Column', 'portfolio-for-elementor' ),
+					'3' => esc_html__( '3 Column', 'portfolio-for-elementor' ),
+					'4' => esc_html__( '4 Column', 'portfolio-for-elementor' ),
+				]
+			]
+		);
+
+		$this->add_control(
+			'number_of_item_show',
+			[
+				'label'       => esc_html__( 'Number of Item Show', 'portfolio-for-elementor' ),
+				'type'        => Controls_Manager::TEXT,
+				'default'     => esc_html__( '9', 'portfolio-for-elementor' ),
+				'placeholder' => esc_html__( '9', 'portfolio-for-elementor' ),
+			]
+		);
 
 		$this->add_control(
 			'portfolio_show_category',
@@ -229,11 +252,12 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
                             <!-- End Mixitup Nav-->
 
                             <div class="row magnific-mix-gallery effect-up clean-text masonary text-light">
-                                <div id="portfolio-grid" class="utf-portfolio-items col-3">
+                                <div id="portfolio-grid"
+                                     class="utf-portfolio-items col-<?php echo esc_attr( $settings['number_of_column_show'] ) ?>">
 
 									<?php
 									$portfolio = new WP_Query( [
-										'posts_per_page' => '-1',
+										'posts_per_page' => $settings['number_of_item_show'],
 										'post_type'      => 'pfe_portfolio',
 										'post_status'    => 'publish',
 
@@ -241,7 +265,7 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 									while ( $portfolio->have_posts() ) {
 										$portfolio->the_post();
 										$portfolio_category = $this->get_portfolio_category( get_the_ID() );
-										$image_url          = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+										$image_url          = get_the_post_thumbnail_url( get_the_ID(), 'medium' );
 										?>
                                         <div class="pf-item <?php echo esc_attr( $portfolio_category ) ?>">
                                             <div class="item-effect"><img

@@ -28,14 +28,6 @@
                 },
             });
 
-            /* Filter active */
-            $(".utf-blog-masonry").isotope({
-                itemSelector: ".blog-item",
-                percentPosition: true,
-                masonry: {
-                    columnWidth: ".blog-item",
-                },
-            });
         });
 
         /* ==================================================
@@ -52,13 +44,6 @@
             },
         });
 
-        $(".popup-youtube, .popup-vimeo, .popup-gmaps").magnificPopup({
-            type: "iframe",
-            mainClass: "mfp-fade",
-            removalDelay: 160,
-            preloader: false,
-            fixedContentPos: false,
-        });
 
         $(".magnific-mix-gallery").each(function() {
             var $container = $(this);
