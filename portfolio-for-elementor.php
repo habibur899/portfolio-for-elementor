@@ -20,6 +20,8 @@ function portfolio_for_elementor_addon() {
 
 	// Load plugin file
 	require_once( __DIR__ . '/includes/plugin.php' );
+	require_once( __DIR__ . '/classes/portfolio-for-elementor-functions.php' );
+	require_once( __DIR__ . '/classes/portfolio-for-elementor-post-type.php' );
 
 	// Run the plugin
 	\Portfolio_For_Elementor_Addon\Portfolio_For_Elementor::instance();

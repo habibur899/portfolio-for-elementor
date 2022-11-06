@@ -172,6 +172,7 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 			]
 		);
 
+
 		$this->add_control(
 			'portfolio_show_category',
 			[
@@ -265,7 +266,11 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 									while ( $portfolio->have_posts() ) {
 										$portfolio->the_post();
 										$portfolio_category = $this->get_portfolio_category( get_the_ID() );
-										$image_url          = get_the_post_thumbnail_url( get_the_ID(), 'medium' );
+										if ( $settings['portfolio_grid_style'] == 'grid' ) {
+											$image_url = get_the_post_thumbnail_url( get_the_ID(), 'pfe-size' );
+										} else {
+											$image_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+										}
 										?>
                                         <div class="pf-item <?php echo esc_attr( $portfolio_category ) ?>">
                                             <div class="item-effect"><img
