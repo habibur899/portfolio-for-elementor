@@ -30,7 +30,7 @@
                 percentPosition: true,
                 masonry: {
                     columnWidth: ".pf-item",
-                },
+                }
             });
 
         });

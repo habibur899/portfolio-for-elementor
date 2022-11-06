@@ -267,13 +267,15 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 										$portfolio->the_post();
 										$portfolio_category = $this->get_portfolio_category( get_the_ID() );
 										if ( $settings['portfolio_grid_style'] == 'grid' ) {
-											$image_url = get_the_post_thumbnail_url( get_the_ID(), 'pfe-size' );
+											$image_url = get_the_post_thumbnail_url( get_the_ID(), 'portfolio_grid' );
 										} else {
 											$image_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
 										}
 										?>
                                         <div class="pf-item <?php echo esc_attr( $portfolio_category ) ?>">
-                                            <div class="item-effect"><img
+                                            <div class="item-effect <?php if ( $settings['portfolio_grid_style'] == 'grid' ) {
+												echo 'box-height';
+											} ?>"><img
                                                         src="<?php echo esc_url( $image_url ) ?>"
                                                         alt="thumb">
                                                 <div class="bottom-info">
