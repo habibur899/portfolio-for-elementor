@@ -1,7 +1,9 @@
 <?php
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Box_Shadow;
+use Elementor\Group_Control_Typography;
 use Elementor\Widget_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -277,11 +279,23 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 				],
 			]
 		);
+		$this->add_control(
+			'category_button_border_radius',
+			[
+				'label'      => esc_html__( 'Border Radius', 'portfolio-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .mix-item-menu.category-count button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+
 		$this->add_group_control(
 			Group_Control_Box_Shadow::get_type(),
 			[
-				'name' => 'category_box_shadow',
-				'label' => esc_html__( 'Box Shadow', 'portfolio-for-elementor' ),
+				'name'     => 'category_box_shadow',
+				'label'    => esc_html__( 'Box Shadow', 'portfolio-for-elementor' ),
 				'selector' => '{{WRAPPER}} .mix-item-menu.category-count button',
 			]
 		);
@@ -296,6 +310,13 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 				'label' => esc_html__( 'Normal', 'portfolio-for-elementor' ),
 			]
 		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'category_normal_content_typography',
+				'selector' => '{{WRAPPER}} .mix-item-menu button',
+			]
+		);
 
 
 		$this->end_controls_tab();
@@ -304,6 +325,26 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 			'category_style_hover_tab',
 			[
 				'label' => esc_html__( 'Hover', 'portfolio-for-elementor' ),
+			]
+		);
+		$this->add_control(
+			'hover_category_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'portfolio-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .mix-item-menu button:hover' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'hover_category_background_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'portfolio-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .mix-item-menu button:hover' => 'background: {{VALUE}}',
+				],
 			]
 		);
 
@@ -315,10 +356,124 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 				'label' => esc_html__( 'Active', 'portfolio-for-elementor' ),
 			]
 		);
+		$this->add_control(
+			'active_category_text_color',
+			[
+				'label'     => esc_html__( 'Text Color', 'portfolio-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .mix-item-menu button.active' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'active_category_background_color',
+			[
+				'label'     => esc_html__( 'Background Color', 'portfolio-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#c70039',
+				'selectors' => [
+					'{{WRAPPER}} .mix-item-menu button.active' => 'background: {{VALUE}}',
+				],
+			]
+		);
 
 		$this->end_controls_tab();
 
 		$this->end_controls_tabs();
+
+
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'portfolio_item_style_section',
+			[
+				'label' => esc_html__( 'Portfolio Item Style', 'portfolio-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+
+		$this->add_group_control(
+			Group_Control_Background::get_type(),
+			[
+				'name'       => 'portfolio_item_overlay_opacity',
+				'label'      => esc_html__( 'Overlay', 'portfolio-for-elementor' ),
+				'types'      => [ 'classic' ],
+				'show_label' => true,
+				'exclude'    => [ 'image' ],
+				'selector'   => '{{WRAPPER}} .utf-portfolio-area-item .pf-item .item-effect::after',
+			]
+		);
+		$this->add_control(
+			'portfolio_item_title_color',
+			[
+				'label'     => esc_html__( 'Title Color', 'portfolio-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'selectors' => [
+					'{{WRAPPER}} .item-effect .bottom-info h4' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'portfolio_item_title_typography',
+				'selector' => '{{WRAPPER}} .item-effect .bottom-info h4',
+			]
+		);
+
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'icon_style_section',
+			[
+				'label' => esc_html__( 'Icon Style', 'portfolio-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$this->add_control(
+			'portfolio_zoom_icon',
+			[
+				'label'   => esc_html__( 'Zoom Icon', 'portfolio-for-elementor' ),
+				'type'    => Controls_Manager::ICONS,
+				'default' => [
+					'value'   => 'fa fa-expand',
+					'library' => 'fa-solid',
+				]
+			]
+		);
+		$this->add_control(
+			'portfolio_anchor_icon',
+			[
+				'label'   => esc_html__( 'Anchor Icon', 'portfolio-for-elementor' ),
+				'type'    => Controls_Manager::ICONS,
+				'default' => [
+					'value'   => 'fas fa-link',
+					'library' => 'fa-solid',
+				]
+			]
+		);
+		$this->add_control(
+			'portfolio_icon_normal_color',
+			[
+				'label'     => esc_html__( 'Icon Color', 'portfolio-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#ffffff',
+				'selectors' => [
+					'{{WRAPPER}} .item-effect a' => 'color: {{VALUE}}',
+				],
+			]
+		);
+		$this->add_control(
+			'portfolio_icon_background_color',
+			[
+				'label'     => esc_html__( 'Icon Background', 'portfolio-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#c70039',
+				'selectors' => [
+					'{{WRAPPER}} .item-effect a' => 'background: {{VALUE}}',
+				],
+			]
+		);
 
 
 		$this->end_controls_section();
@@ -334,7 +489,9 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 	 */
 	protected function render() {
 
-		$settings = $this->get_settings_for_display(); ?>
+		$settings = $this->get_settings_for_display();
+
+		?>
         <!-- Start Portfolio Grid -->
         <div id="portfolio" class="utf-portfolio-area-item text-light default-padding">
             <div class="container">
@@ -386,9 +543,10 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
                                                     <h4><?php the_title() ?></h4>
                                                     <a href="<?php echo esc_url( $image_url ) ?>"
                                                        class="item utf-popup-link"><i
-                                                                class="fa fa-expand"></i></a> <a
+                                                                class="<?php echo esc_attr( $settings['portfolio_zoom_icon']['value'] ) ?>"></i></a>
+                                                    <a
                                                             href="<?php esc_url( the_permalink() ) ?>"><i
-                                                                class="fas fa-link"></i></a>
+                                                                class="<?php echo esc_attr( $settings['portfolio_anchor_icon']['value'] ) ?>"></i></a>
                                                 </div>
                                             </div>
                                         </div>
