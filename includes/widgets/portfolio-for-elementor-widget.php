@@ -1,6 +1,7 @@
 <?php
 
 use Elementor\Controls_Manager;
+use Elementor\Group_Control_Box_Shadow;
 use Elementor\Widget_Base;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -172,7 +173,39 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 			]
 		);
 
+		$this->add_control(
+			'grid_height',
+			[
+				'label'      => esc_html__( 'Item Height (px)', 'portfolio-for-elementor' ),
+				'type'       => Controls_Manager::SLIDER,
+				'size_units' => [ 'px' ],
+				'range'      => [
+					'px' => [
+						'min' => 0,
+						'max' => 1000,
 
+					]
+				],
+				'default'    => [
+					'unit' => 'px',
+					'size' => 250,
+				],
+				'selectors'  => [
+					'{{WRAPPER}} .box-height' => 'height: {{SIZE}}{{UNIT}};',
+				],
+				'condition'  => [
+					'portfolio_grid_style' => 'grid'
+				]
+			]
+		);
+		$this->end_controls_section();
+		$this->start_controls_section(
+			'category_settings_section',
+			[
+				'label' => esc_html__( 'Category Settings', 'portfolio-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_CONTENT,
+			]
+		);
 		$this->add_control(
 			'portfolio_show_category',
 			[
@@ -211,6 +244,81 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 				]
 			]
 		);
+
+
+		$this->end_controls_section();
+
+		$this->start_controls_section(
+			'category_style_section',
+			[
+				'label' => esc_html__( 'Category Style', 'portfolio-for-elementor' ),
+				'tab'   => Controls_Manager::TAB_STYLE,
+			]
+		);
+		$this->add_control(
+			'category_button_margin',
+			[
+				'label'      => esc_html__( 'Margin', 'portfolio-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .mix-item-menu.category-count button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_control(
+			'category_button_padding',
+			[
+				'label'      => esc_html__( 'Padding', 'portfolio-for-elementor' ),
+				'type'       => Controls_Manager::DIMENSIONS,
+				'size_units' => [ 'px', '%', 'em' ],
+				'selectors'  => [
+					'{{WRAPPER}} .mix-item-menu.category-count button' => 'margin: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+				],
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Box_Shadow::get_type(),
+			[
+				'name' => 'category_box_shadow',
+				'label' => esc_html__( 'Box Shadow', 'portfolio-for-elementor' ),
+				'selector' => '{{WRAPPER}} .mix-item-menu.category-count button',
+			]
+		);
+
+		$this->start_controls_tabs(
+			'category_style_controls'
+		);
+
+		$this->start_controls_tab(
+			'category_style_normal_tab',
+			[
+				'label' => esc_html__( 'Normal', 'portfolio-for-elementor' ),
+			]
+		);
+
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'category_style_hover_tab',
+			[
+				'label' => esc_html__( 'Hover', 'portfolio-for-elementor' ),
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->start_controls_tab(
+			'category_style_active_tab',
+			[
+				'label' => esc_html__( 'Active', 'portfolio-for-elementor' ),
+			]
+		);
+
+		$this->end_controls_tab();
+
+		$this->end_controls_tabs();
 
 
 		$this->end_controls_section();
@@ -266,11 +374,7 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 									while ( $portfolio->have_posts() ) {
 										$portfolio->the_post();
 										$portfolio_category = $this->get_portfolio_category( get_the_ID() );
-										if ( $settings['portfolio_grid_style'] == 'grid' ) {
-											$image_url = get_the_post_thumbnail_url( get_the_ID(), 'portfolio_grid' );
-										} else {
-											$image_url = get_the_post_thumbnail_url( get_the_ID(), 'large' );
-										}
+										$image_url          = get_the_post_thumbnail_url( get_the_ID() );
 										?>
                                         <div class="pf-item <?php echo esc_attr( $portfolio_category ) ?>">
                                             <div class="item-effect <?php if ( $settings['portfolio_grid_style'] == 'grid' ) {

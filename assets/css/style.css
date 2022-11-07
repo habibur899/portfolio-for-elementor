@@ -182,9 +182,7 @@ button {
     -webkit-border-radius: 30px;
     -moz-border-radius: 30px;
     border-radius: 30px;
-    margin-bottom: 8px !important;
-    margin-left: 3px !important;
-    margin-right: 3px !important;
+    margin: 3px 0px 3px 8px;
     padding: 8px 20px;
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.2);
 }
