@@ -140,6 +140,18 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 			]
 		);
 		$this->add_control(
+			'portfolio_for_elementor_style',
+			[
+				'label'   => esc_html__( 'Style', 'portfolio-for-elementor' ),
+				'type'    => Controls_Manager::SELECT,
+				'default' => 'design_1',
+				'options' => [
+					'design_1' => esc_html__( 'Design 1', 'portfolio-for-elementor' ),
+					'design_2' => esc_html__( 'Design 2', 'portfolio-for-elementor' ),
+				]
+			]
+		);
+		$this->add_control(
 			'portfolio_grid_style',
 			[
 				'label'   => esc_html__( 'Grid Style', 'portfolio-for-elementor' ),
@@ -402,6 +414,9 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 				'show_label' => true,
 				'exclude'    => [ 'image' ],
 				'selector'   => '{{WRAPPER}} .utf-portfolio-area-item .pf-item .item-effect::after',
+				'condition' => [
+					'portfolio_for_elementor_style'            => 'design_1',
+				]
 			]
 		);
 		$this->add_control(
@@ -409,8 +424,10 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 			[
 				'label'     => esc_html__( 'Title Color', 'portfolio-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
+				'default'   => '#c70039',
 				'selectors' => [
-					'{{WRAPPER}} .item-effect .bottom-info h4' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .effect-slide-up h4' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .effect-slide-up:hover h4' => 'color: {{VALUE}}',
 				],
 			]
 		);
@@ -419,6 +436,44 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 			[
 				'name'     => 'portfolio_item_title_typography',
 				'selector' => '{{WRAPPER}} .item-effect .bottom-info h4',
+				'condition' => [
+					'portfolio_for_elementor_style'            => 'design_1',
+				]
+			]
+		);
+        $this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'portfolio_item_design2_title_typography',
+				'selector' => '{{WRAPPER}} .effect-slide-up h4',
+				'condition' => [
+					'portfolio_for_elementor_style'            => 'design_2',
+				]
+			]
+		);
+        $this->add_control(
+			'portfolio_item_category_color',
+			[
+				'label'     => esc_html__( 'Category Color', 'portfolio-for-elementor' ),
+				'type'      => Controls_Manager::COLOR,
+				'default'   => '#c70039',
+				'selectors' => [
+					'{{WRAPPER}} .effect-slide-up .category' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .effect-slide-up .category span' => 'color: {{VALUE}}',
+				],
+				'condition' => [
+					'portfolio_for_elementor_style'            => 'design_2',
+				]
+			]
+		);
+		$this->add_group_control(
+			Group_Control_Typography::get_type(),
+			[
+				'name'     => 'portfolio_item_design2_cat_typography',
+				'selector' => '{{WRAPPER}} .effect-slide-up .category',
+				'condition' => [
+					'portfolio_for_elementor_style'            => 'design_2',
+				]
 			]
 		);
 
@@ -428,6 +483,9 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 			[
 				'label' => esc_html__( 'Icon Style', 'portfolio-for-elementor' ),
 				'tab'   => Controls_Manager::TAB_STYLE,
+				'condition' => [
+					'portfolio_for_elementor_style'            => 'design_1',
+				]
 			]
 		);
 		$this->add_control(
@@ -532,25 +590,44 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 										$portfolio->the_post();
 										$portfolio_category = $this->get_portfolio_category( get_the_ID() );
 										$image_url          = get_the_post_thumbnail_url( get_the_ID() );
-										?>
-                                        <div class="pf-item <?php echo esc_attr( $portfolio_category ) ?>">
-                                            <div class="item-effect <?php if ( $settings['portfolio_grid_style'] == 'grid' ) {
-												echo 'box-height';
-											} ?>"><img
-                                                        src="<?php echo esc_url( $image_url ) ?>"
-                                                        alt="thumb">
-                                                <div class="bottom-info">
-                                                    <h4><?php the_title() ?></h4>
-                                                    <a href="<?php echo esc_url( $image_url ) ?>"
-                                                       class="item utf-popup-link"><i
-                                                                class="<?php echo esc_attr( $settings['portfolio_zoom_icon']['value'] ) ?>"></i></a>
-                                                    <a
-                                                            href="<?php esc_url( the_permalink() ) ?>"><i
-                                                                class="<?php echo esc_attr( $settings['portfolio_anchor_icon']['value'] ) ?>"></i></a>
+										if ( $settings['portfolio_for_elementor_style'] == 'design_1' ) {
+											?>
+
+                                            <div class="pf-item <?php echo esc_attr( $portfolio_category ) ?>">
+                                                <div class="item-effect <?php if ( $settings['portfolio_grid_style'] == 'grid' ) {
+													echo 'box-height';
+												} ?>"><img
+                                                            src="<?php echo esc_url( $image_url ) ?>"
+                                                            alt="thumb">
+                                                    <div class="bottom-info">
+                                                        <h4><?php the_title() ?></h4>
+                                                        <a href="<?php echo esc_url( $image_url ) ?>"
+                                                           class="item utf-popup-link"><i
+                                                                    class="<?php echo esc_attr( $settings['portfolio_zoom_icon']['value'] ) ?>"></i></a>
+                                                        <a
+                                                                href="<?php esc_url( the_permalink() ) ?>"><i
+                                                                    class="<?php echo esc_attr( $settings['portfolio_anchor_icon']['value'] ) ?>"></i></a>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-										<?php
+											<?php
+										} elseif ( $settings['portfolio_for_elementor_style'] == 'design_2' ) {
+											?>
+                                            <div class="pf-item <?php echo esc_attr( $portfolio_category ) ?>">
+                                                <div class="effect-slide-up <?php if ( $settings['portfolio_grid_style'] == 'grid' ) {
+													echo 'box-height';
+												} ?>">
+                                                    <a href="<?php esc_url( the_permalink() ) ?>"> <img
+                                                                src="<?php echo esc_url( $image_url ) ?>"
+                                                                alt="<?php the_title() ?>">
+                                                        <h4><?php the_title() ?></h4>
+                                                        <div class="category"><span>Design</span> <span>Creative Designer</span>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </div>
+											<?php
+										}
 									}
 									wp_reset_query();
 									?>

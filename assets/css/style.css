@@ -731,6 +731,7 @@ button {
     -webkit-transform: translateY(10px);
     transform: translateY(10px);
     z-index: 2;
+    color: red;
 }
 
 .effect-slide-up .category {
@@ -816,6 +817,9 @@ button {
     -webkit-transform: translateY(0);
     transform: translateY(0);
     opacity: 1;
+}
+.effect-slide-up:hover h4{
+    color:red;
 }
 
 .effect-slide-up:hover:before,
