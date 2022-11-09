@@ -427,6 +427,7 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 				'default'   => '#c70039',
 				'selectors' => [
 					'{{WRAPPER}} .effect-slide-up h4' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .item-effect .bottom-info h4' => 'color: {{VALUE}}',
 					'{{WRAPPER}} .effect-slide-up:hover h4' => 'color: {{VALUE}}',
 				],
 			]
