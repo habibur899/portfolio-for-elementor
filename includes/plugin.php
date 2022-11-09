@@ -234,7 +234,6 @@ final class Portfolio_For_Elementor {
 	//CSS
 	public function portfolio_for_elementor_style() {
 		wp_enqueue_style( 'portfolio-for-elementor-fontawesome-css', plugin_dir_url( __FILE__ ) . '../assets/css/font-awesome.min.css' );
-		wp_enqueue_style( 'portfolio-for-elementor-magnific-css', plugin_dir_url( __FILE__ ) . '../assets/css/magnific-popup.css' );
 		wp_enqueue_style( 'portfolio-for-elementor-animate-css', plugin_dir_url( __FILE__ ) . '../assets/css/animate.css' );
 		wp_enqueue_style( 'portfolio-for-elementor-style-css', plugin_dir_url( __FILE__ ) . '../assets/css/style.css' );
 		wp_enqueue_style( 'portfolio-for-elementor-responsive-css', plugin_dir_url( __FILE__ ) . '../assets/css/responsive.css' );
@@ -242,10 +241,8 @@ final class Portfolio_For_Elementor {
 
 	//JS
 	public function portfolio_for_elementor_script() {
-		wp_enqueue_script( 'portfolio-for-elementor-magnific-js', plugin_dir_url( __FILE__ ) . '../assets/js/jquery.magnific-popup.min.js', array( 'jquery' ), '1.0.0', true );
 		wp_enqueue_script( 'portfolio-for-elementor-isotope-js', plugin_dir_url( __FILE__ ) . '../assets/js/isotope.pkgd.min.js', array(
-			'jquery',
-			'portfolio-for-elementor-magnific-js'
+			'jquery'
 		), '1.0.0', true );
 		wp_enqueue_script( 'portfolio-for-elementor-imagesloaded-js', plugin_dir_url( __FILE__ ) . '../assets/js/imagesloaded.pkgd.min.js', array(
 			'jquery',
