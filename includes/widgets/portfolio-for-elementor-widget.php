@@ -414,8 +414,8 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 				'show_label' => true,
 				'exclude'    => [ 'image' ],
 				'selector'   => '{{WRAPPER}} .utf-portfolio-area-item .pf-item .item-effect::after',
-				'condition' => [
-					'portfolio_for_elementor_style'            => 'design_1',
+				'condition'  => [
+					'portfolio_for_elementor_style' => 'design_1',
 				]
 			]
 		);
@@ -426,54 +426,54 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#c70039',
 				'selectors' => [
-					'{{WRAPPER}} .effect-slide-up h4' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .effect-slide-up h4'          => 'color: {{VALUE}}',
 					'{{WRAPPER}} .item-effect .bottom-info h4' => 'color: {{VALUE}}',
-					'{{WRAPPER}} .effect-slide-up:hover h4' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .effect-slide-up:hover h4'    => 'color: {{VALUE}}',
 				],
 			]
 		);
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'portfolio_item_title_typography',
-				'selector' => '{{WRAPPER}} .item-effect .bottom-info h4',
+				'name'      => 'portfolio_item_title_typography',
+				'selector'  => '{{WRAPPER}} .item-effect .bottom-info h4',
 				'condition' => [
-					'portfolio_for_elementor_style'            => 'design_1',
+					'portfolio_for_elementor_style' => 'design_1',
 				]
 			]
 		);
-        $this->add_group_control(
+		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'portfolio_item_design2_title_typography',
-				'selector' => '{{WRAPPER}} .effect-slide-up h4',
+				'name'      => 'portfolio_item_design2_title_typography',
+				'selector'  => '{{WRAPPER}} .effect-slide-up h4',
 				'condition' => [
-					'portfolio_for_elementor_style'            => 'design_2',
+					'portfolio_for_elementor_style' => 'design_2',
 				]
 			]
 		);
-        $this->add_control(
+		$this->add_control(
 			'portfolio_item_category_color',
 			[
 				'label'     => esc_html__( 'Category Color', 'portfolio-for-elementor' ),
 				'type'      => Controls_Manager::COLOR,
 				'default'   => '#c70039',
 				'selectors' => [
-					'{{WRAPPER}} .effect-slide-up .category' => 'color: {{VALUE}}',
+					'{{WRAPPER}} .effect-slide-up .category'      => 'color: {{VALUE}}',
 					'{{WRAPPER}} .effect-slide-up .category span' => 'color: {{VALUE}}',
 				],
 				'condition' => [
-					'portfolio_for_elementor_style'            => 'design_2',
+					'portfolio_for_elementor_style' => 'design_2',
 				]
 			]
 		);
 		$this->add_group_control(
 			Group_Control_Typography::get_type(),
 			[
-				'name'     => 'portfolio_item_design2_cat_typography',
-				'selector' => '{{WRAPPER}} .effect-slide-up .category',
+				'name'      => 'portfolio_item_design2_cat_typography',
+				'selector'  => '{{WRAPPER}} .effect-slide-up .category',
 				'condition' => [
-					'portfolio_for_elementor_style'            => 'design_2',
+					'portfolio_for_elementor_style' => 'design_2',
 				]
 			]
 		);
@@ -482,10 +482,10 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
 		$this->start_controls_section(
 			'icon_style_section',
 			[
-				'label' => esc_html__( 'Icon Style', 'portfolio-for-elementor' ),
-				'tab'   => Controls_Manager::TAB_STYLE,
+				'label'     => esc_html__( 'Icon Style', 'portfolio-for-elementor' ),
+				'tab'       => Controls_Manager::TAB_STYLE,
 				'condition' => [
-					'portfolio_for_elementor_style'            => 'design_1',
+					'portfolio_for_elementor_style' => 'design_1',
 				]
 			]
 		);
@@ -566,10 +566,10 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
                                 <div class="mix-item-menu category-count">
 									<?php if ( $settings['portfolio_show_category_all_button'] == 'show' ) { ?>
                                         <button class="active"
-                                                data-filter="*"><?php echo esc_html__( $settings['category_all_text'], 'portfolio-for-elementor' ) ?></button>
+                                                data-filter="*"><?php echo esc_html( $settings['category_all_text'] ) ?></button>
 									<?php } ?>
 									<?php foreach ( $categorys as $category ) {
-										printf( '<button data-filter=".%s">%s</button>', esc_attr( $category->slug ), esc_html__( $category->name, 'portfolio-for-elementor' ) );
+										printf( '<button data-filter=".%s">%s</button>', esc_attr( $category->slug ), esc_html( $category->name) );
 									} ?>
 
                                 </div>
@@ -622,7 +622,13 @@ class Portfolio_For_Elementor_Widget extends Widget_Base {
                                                                 src="<?php echo esc_url( $image_url ) ?>"
                                                                 alt="<?php the_title() ?>">
                                                         <h4><?php the_title() ?></h4>
-                                                        <div class="category"><span>Design</span> <span>Creative Designer</span>
+                                                        <div class="category">
+															<?php
+															$categories = get_the_terms( get_the_ID(), 'pfe_portfolio_category' );
+															foreach ( $categories as $category ) {
+																printf( '<span>%s</span>', esc_html( $category->name ) );
+															}
+															?>
                                                         </div>
                                                     </a>
                                                 </div>
