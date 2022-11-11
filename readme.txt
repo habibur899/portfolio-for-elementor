@@ -53,7 +53,11 @@ No! Elementor provides you with all the widgets and features that you need to bu
 
 == Screenshots ==
 
-1. This is backend screenshot
+1. Grid Portfolio.
+1. Masonry Portfolio.
+1. Plugin Backend.
+1. 2 Column Masonry Style.
+1. 2 Column Grid Style.
 
 == Changelog ==
 
